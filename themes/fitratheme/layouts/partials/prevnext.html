@@ -1,0 +1,33 @@
+<!-- Related Blog Start -->
+<section class="pb-12 dark:bg-dark text-justify dark:text-white">
+  <div class="container">
+    <div class="flex justify-between mx-auto lg:w-2/3">
+      {{if .PrevInSection}}
+      <div class="text-left w-1/2">
+        <a
+          href="{{ .PrevInSection.Permalink }}"
+          class="font-semibold text-base text-dark dark:text-white hover:text-primary dark:hover:text-primary"
+        >
+          &#129060; Previous Article <br />
+          {{ .PrevInSection.Title }}
+        </a>
+      </div>
+      {{else}}
+      <div class="text-left w-1/2"></div>
+      {{end}} {{ if .NextInSection }}
+      <div class="text-right">
+        <a
+          href="{{ .NextInSection.Permalink }}"
+          class="font-semibold text-base text-dark dark:text-white hover:text-primary dark:hover:text-primary"
+        >
+          Next Article &#8594;<br />
+          {{ .NextInSection.Title }}
+        </a>
+      </div>
+      {{else}}
+      <div class="text-right"></div>
+      {{end}}
+    </div>
+  </div>
+</section>
+<!-- Related Blog End -->

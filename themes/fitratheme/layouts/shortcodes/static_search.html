@@ -1,0 +1,107 @@
+<!-- Search Section Start -->
+<section id="search" class="pt-36 pb-20 dark:bg-dark">
+  <div class="container mb-20">
+    <div class="flex flex-wrap justify-center">
+      <div class="max-w-xl mx-auto text-center mb-16">
+        <h2
+          class="font-bold text-dark text-2xl mt-2 mb-4 md:text-3xl lg:text-4xl dark:text-white"
+        >
+          Search
+        </h2>
+
+        <div>
+          <div class="mx-auto w-10 h-2 bg-primary"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap justify-center lg:w-1/2 mx-auto">
+      <!-- Search Start -->
+      <div class="flex w-full justify-center">
+        <input
+          type="text"
+          id="myInput"
+          onkeyup="myFunction()"
+          placeholder="Cari Judul..."
+          class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary mb-2"
+        />
+      </div>
+
+      <br />
+      <div class="w-full flex justify-center">
+        <table id="myTable" class="w-full" style="display: none">
+          <thead>
+            <tr>
+              <th class="px-4 py-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range where .Site.RegularPages "Params.type" "not in" (slice
+            "static" "custom_page") }}
+           
+            <tr class="border-b-2">
+              <td class="px-4 py-2">
+                <a
+                  href="{{.Permalink}}"
+                  class="block mb-3 font-semibold text-xl text-dark dark:text-white"
+                >
+                  <span
+                    class="bg-gradient-to-r from-primary via-primary to-primary bg-[length:0%_5px] bg-no-repeat bg-left-bottom hover:bg-[length:100%_5px] transition-all duration-500"
+                  >
+                    {{.Title}}</span
+                  >
+                </a>
+                <i
+                  ><p class="text-secondary text-sm dark:text-white text-base">
+                    {{.Params.author}} | {{if eq .Params.has_updated false}}
+                    {{.Params.created_date}} {{else}} {{.Params.updated_date}}
+                    {{end}} {{if isset .Params "read_time" }} |
+                    {{.Params.read_time}}{{end}}
+                  </p></i
+                >
+              </td>
+              {{end}}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Search End -->
+    </div>
+  </div>
+</section>
+<!-- Search Section End -->
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Jika input form kosong, sembunyikan tabel
+    if (input.value === "") {
+      table.style.display = "none";
+    } else {
+      table.style.display = "";
+      // Loop melalui semua baris tabel dan sembunyikan yang tidak sesuai dengan kueri pencarian
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  }
+
+  // Menambahkan event listener untuk event 'focus' dan 'blur'
+  document.getElementById("myInput").addEventListener("focus", function () {
+    if (document.getElementById("myInput").value !== "") {
+      document.getElementById("myTable").style.display = "";
+    }
+  });
+</script>

@@ -1,0 +1,29 @@
+baseURL = 'https://defitra.my.id/'
+languageCode = 'en-us'
+title = 'Defitra H'
+theme = 'fitratheme'
+paginate = 6
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+  series = 'series'
+
+[permalinks]
+  blog = ':slug'
+
+[related]
+  threshold = 80
+  includeNewer = true
+  toLower = false
+  indices = [
+    {name = "series", weight = 100},
+    {name = "categories", weight = 50},
+    {name = "tags", weight = 30},
+    {name = "date", weight = 10},
+  ]
+
+[params]
+  Description = "Selamat datang di website defitra.my.id. Perkenalkan, nama saya Defitra Hidayatullah. Saya mendokumentasikan proses belajar saya melalui website ini."
+  Keywords = "Defitra Hidayatullah, Defitra H, defitra my id"
+  Ads_Header = false

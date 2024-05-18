@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="id">
+  <head>
+    {{- partial "head_single.html" . -}}
+  </head>
+  <body>
+    {{if eq .Section "tool" }}
+    <!-- Header Tools Start -->
+    <header
+      class="bg-transparent absolute top-0 left-0 w-full flex flex-wrap items-center z-10"
+    >
+      <!-- Ads Header Start -->
+      {{if eq .Params.ads_header true}} {{$ads_header_name :=
+      .Params.ads_header_name}} {{range .Site.Data.ads}} {{if eq .name
+      $ads_header_name }}
+
+      <div class="flex justify-between items-center w-full p-1 bg-primary">
+        <div class="px-2 py-2 w-[32px] h-[32px]"></div>
+        <!-- Ads Text Start -->
+        <div>
+          <p class="text-white text-lg font-bold justify-center">
+            {{.text}}
+            <a href="{{.url}}" class="underline">{{.name}}</a>
+          </p>
+        </div>
+        <!-- Ads Text End -->
+        <button
+          class="w-[32px] h-[32px] text-base font-bold text-white px-2 py-2 rounded-md hover:bg-red-500 hover:opacity transition duration-100"
+          onclick="this.parentNode.remove()"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      {{end}} {{end}} {{end}}
+      <!-- Ads Header End -->
+      <!-- Navbar Start -->
+      {{ partial "navbar_single.html" . }}
+      <!-- Navbar End -->
+    </header>
+    <!-- Header Tools End -->
+
+    {{else}}
+    <!-- Header Blog Start -->
+    <header
+      class="bg-transparent absolute top-0 left-0 w-full flex flex-wrap items-center z-10"
+    >
+      <!-- Ads Header Start -->
+      {{if eq .Params.ads_header true}} {{$ads_header_name :=
+      .Params.ads_header_name}} {{range .Site.Data.ads}} {{if eq .name
+      $ads_header_name }}
+
+      <div class="flex justify-between items-center w-full p-1 bg-primary">
+        <div class="px-2 py-2 w-[32px] h-[32px]"></div>
+        <!-- Ads Text Start -->
+        <div>
+          <p class="text-white text-lg font-bold justify-center">
+            {{.text}}
+            <a href="{{.url}}" class="underline">{{.name}}</a>
+          </p>
+        </div>
+        <!-- Ads Text End -->
+        <button
+          class="w-[32px] h-[32px] text-base font-bold text-white px-2 py-2 rounded-md hover:bg-red-500 hover:opacity transition duration-100"
+          onclick="this.parentNode.remove()"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      {{end}} {{end}} {{end}}
+      <!-- Ads Header End -->
+      <!-- Navbar Start -->
+      {{ partial "navbar_single.html" . }}
+      <!-- Navbar End -->
+    </header>
+    <!-- Header Blog End -->
+    {{end}} {{ if not (eq .Params.type "custom_page") }}
+    <!-- Content Blog Section Start -->
+    <main id="content" class="pt-36 dark:bg-dark">
+      <div class="container">
+        <div class="flex flex-wrap pb-4">
+          <!-- First Dummy Col Start -->
+          <div class="lg:w-1/4"></div>
+          <!-- First Dummy Col End -->
+          <!-- Main Content Col Start -->
+          <div class="w-full self-start lg:w-2/4 text-dark dark:text-white">
+            <div class="mx-auto {{if eq .Params.type `static`}}pb-20{{end}}">
+              <h1 class="text-5xl font-extrabold mt-10 mb-4">{{.Title}}</h1>
+              <i>
+                <span class="my-4 text-sm text-secondary dark:text-white">
+                  {{if eq .Params.type "post"}} {{if eq .Params.has_updated
+                  false}} {{.Params.author}} · dibuat pada
+                  {{.Params.created_date}} · {{.Params.read_time}} ·{{ if
+                  .Params.categories }} {{delimit .Params.categories ", " }} {{
+                  end }} {{else}} {{.Params.author}} · diperbarui pada
+                  {{.Params.updated_date}} · {{.Params.read_time}} min read · {{
+                  if .Params.categories }} {{ delimit .Params.categories ", " }}
+                  {{ end }} {{end}} {{else}} {{if eq .Params.has_updated false}}
+                  dibuat pada {{.Params.created_date}} {{else}} diperbarui pada
+                  {{.Params.updated_date}} {{end}} {{end}}
+                </span>
+              </i>
+              {{if isset .Params "featured_image"}}
+              <img
+                src="../../{{.Params.featured_image}}"
+                alt="{{.Params.alt_featured_image}}"
+                class="w-full my-4 rounded-md"
+              />
+              {{end}} {{if eq .Params.show_table_of_content true }}
+              <div
+                class="bg-slate-100 dark:bg-slate-700 rounded-md border text-base py-3 px-3 text-justify my-4"
+              >
+                <span class="text-lg font-semibold">Table of Contents</span>
+                {{ .TableOfContents}}
+              </div>
+              {{end}}
+
+              <!-- Affiliatte Disclosure Start -->
+              {{if eq .Params.type "post" }} {{if eq .Params.ads_disclosure
+              true}}
+              <div
+                class="flex items-center border-t-2 border-t-slate-200 border-b-2 border-b-slate-200 bg-white dark:bg-dark mb-6 text-justify"
+              >
+                <i>
+                  <span class="text-secondary text-sm dark:text-white">
+                    Artikel ini berisi tautan afiliasi. Penulis mendapat komisi
+                    atas transaksi pembaca dengan pihak afiliasi
+                    <a
+                      href="/syarat-dan-ketentuan"
+                      style="font-size: 0.875rem; line-height: 1.25rem"
+                      >read more</a
+                    >.
+                  </span>
+                </i>
+              </div>
+              {{end}} {{end}}
+              <!-- Affiliatte Disclosure End -->
+
+              {{.Content}}
+              <!-- Tags Start -->
+              {{if eq .Params.type "post"}} {{with .Params.tags}}
+              <div
+                id="tags"
+                class="flex flex-wrap items-center text-base my-1 pb-2"
+              >
+                <span class="text-dark dark:text-white font-bold">Tags :</span>
+                {{range .}}
+                <a
+                  href="/tags/{{. | urlize}}"
+                  class="mx-1 my-1 px-0.5 font-semibold bg-primary rounded-sm text-white hover:opacity-80 hover:shadow-lg transition duration-100"
+                  >{{.}}</a
+                >{{end}}
+              </div>
+              {{end}} {{end}}
+              <!-- Tags End -->
+            </div>
+          </div>
+          <!-- Main Content Col Start -->
+          <!-- Ads Col Start -->
+          <div
+            class="w-full self-start lg:pt-[175px] lg:px-3 lg:w-1/4 lg:my-0 my-4"
+          >
+            <!-- ADS START -->
+            {{if eq .Params.ads_sidebar true}} {{$ads_sidebar_name :=
+            .Params.ads_sidebar_name}} {{range .Site.Data.ads}} {{if eq .name
+            $ads_sidebar_name }}
+
+            <div id="side_ads" class="dark:bg-dark rounded-md">
+              <div class="relative lg:w-2/3 m-auto overflow-hidden rounded-md">
+                <a href="{{.url}}">
+                  <img
+                    src="{{.img_url}}"
+                    class="w-full rounded-md hover:opacity-80 hover:shadow-lg duration-500 transform hover:scale-105 transition-transform"
+                    alt="{{.img_alt}}"
+                  />
+                </a>
+                <button
+                  class="absolute top-1 right-1 w-[32px] h-[32px] text-base font-bold text-white px-2 py-2 rounded-md hover:bg-red-500 hover:opacity transition duration-100"
+                  onclick="this.parentNode.remove()"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {{end}} {{end}} {{end}}
+            <!-- ADS END -->
+          </div>
+          <!-- Ads Col End -->
+        </div>
+      </div>
+    </main>
+    <!-- Content Blog Section End -->
+    {{else}}
+    <!-- Content Custom_Page Start -->
+    {{.Content}}
+    <!-- Content Custom_Page End -->
+    {{end}} {{ if eq .Params.type "post" }}
+    <!-- Author Section Start -->
+    <section class="dark:bg-dark text-justify pb-10">
+      <div class="container">
+        <div class="mx-auto w-full lg:w-1/2 border rounded-md mb-4">
+          <div class="flex flex-wrap justify-center">
+            <div class="max-w-xl mx-auto text-center">
+              <p
+                class="font-semibold text-dark text-base dark:text-white mb-4 mt-4"
+              >
+                Author
+              </p>
+              <div>
+                <img
+                  src="/img/profil-defitra-almamater.jpg"
+                  alt="Defitra Hidayatullah"
+                  width="100"
+                  height="100"
+                  class="mx-auto rounded-full"
+                />
+              </div>
+              <p class="font-bold text-dark text-lg mb-4 mt-4 dark:text-white">
+                Defitra Hidayatullah
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Author Section End -->
+
+    <!-- Related Blog Start -->
+    {{if eq .Params.type "post" }} {{ partial "related.html" . }}
+    <!-- Related Blog End -->
+    <!-- Next & Previous Start -->
+    {{- partial "prevnext.html" . -}} {{end}}
+    <!-- Next & Previous End -->
+    {{end}} {{- partial "footer.html" . -}} {{if not (eq .Params.type
+    "custom_page")}}{{- partial "backtotop.html" . -}}{{else}}{{end}}
+    <script src="/js/script.js"></script>
+  </body>
+</html>

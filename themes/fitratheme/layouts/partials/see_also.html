@@ -1,0 +1,38 @@
+{{ $related := .Site.RegularPages.Related . | first 3 }} {{ with $related }}
+<!-- See Also -->
+<section class="pb-12 dark:bg-dark text-justify dark:text-white">
+  <div class="container">
+    <div class="max-w-xl mx-auto text-center mb-16 md:w-2/3 lg:w-1/2">
+      <h2
+        class="font-bold text-dark text-3xl mb-4 sm:text-4xl lg:text-5xl dark:text-white"
+      >
+        See Also
+      </h2>
+      <div>
+        <div class="mx-auto w-10 h-2 bg-primary"></div>
+      </div>
+    </div>
+    <div class="lg:w-1/2 mx-auto">
+      <!-- Related Prompt Start  -->
+      {{ range . }}
+      <div class="w-full">
+        <a
+          href="{{.Permalink}}"
+          class="block font-semibold text-xl text-dark dark:text-white"
+        >
+          <div
+            class="bg-white dark:bg-slate-800 rounded-md border shadow-md hover:shadow-2xl dark:hover:bg-blue-400 hover:bg-primary hover:text-white dark:shadow-primary overflow-hidden mb-10"
+          >
+            <div class="py-8 px-6 text-justify">
+              <h3>{{.Title}}</h3>
+            </div>
+          </div>
+        </a>
+      </div>
+      {{ end }}
+      <!-- Related Prompt End -->
+    </div>
+  </div>
+</section>
+<!-- See Also End -->
+{{ end }}

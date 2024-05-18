@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="id">
+  <head>
+    {{- partial "head_home.html" . -}}
+  </head>
+  <body>
+    {{- partial "header.html" . -}}
+    <div>{{- block "main" . }}{{- end }}</div>
+    {{- partial "footer.html" . -}} {{- partial "backtotop.html" . -}}
+    <script src="js/script.js"></script>
+  </body>
+</html>

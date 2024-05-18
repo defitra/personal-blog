@@ -1,0 +1,14 @@
+<div class="mt-5">{{.Inner}}</div>
+
+<!-- Init Code -->
+<script type="text/javascript">
+  // - highlight all pre + code tags (CSS3 selectors)
+  // - use javascript as default language
+  // - use theme "enlighter" as default theme
+  // - replace tabs with 2 spaces
+  EnlighterJS.init("pre", "code", {
+    language: "{{.Get 0}}",
+    theme: "enlighter",
+    indent: 2,
+  });
+</script>
